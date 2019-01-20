@@ -19,20 +19,28 @@ public class StoreController {
 
 	@GetMapping(path="/add") // Map ONLY GET Requests
 	public String addNewStore (@RequestParam String name
-			, @RequestParam String address) {
+			, @RequestParam String address, Model model) {
 
 		Store s = new Store();
 		s.setName(name);
 		s.setAddress(address);
 		storeService.save(s);
-		return "all";
+		model.addAttribute("message", "Store " + name + " saved with success!");
+		return "new";
 	}
 
 	@GetMapping(path="/all")
-	public String getAllUsers(Model model) {		
+	public String getAllStores(Model model) {		
 		model.addAttribute("stores", storeService.findAll());
 		return "store";
 	}
+	
+	@GetMapping(path="/byName")
+	public String getStore(@RequestParam String name, Model model) {
+		model.addAttribute("store", storeService.findByName(name));
+		return "store";
+	}
+	
 	
 	@GetMapping(path="/new")
 	public String newStore() {	

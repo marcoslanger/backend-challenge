@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.invillia.acme.model.entity.Store;
-import com.invillia.acme.model.repo.StoreRepository;
+import com.invillia.acme.model.repo.store.StoreRepository;
 
 @Service
 public class StoreService {
@@ -14,6 +14,10 @@ public class StoreService {
 	
 	public Iterable<Store> findAll() {		
 		return storeRepository.findAll();	
+	}
+	
+	public Store findByName(String name) {		
+		return storeRepository.findByName(name);	
 	}
 	
 	public void save(Store s) {
