@@ -18,10 +18,10 @@ public class StoreCustomRepositoryImpl implements StoreCustomRepository {
     EntityManager entityManager;
 
 	@Override
-	public Store findByName(String name) {
+	public Iterable<Store> findByName(String name) {
 		Query query = entityManager.createNativeQuery("SELECT * FROM DB_ACME.STORE WHERE name LIKE ?", Store.class);
-        query.setParameter(1, name + "%");
-        return (Store) query.getSingleResult();
+        query.setParameter(1, "%" + name + "%");
+        return query.getResultList();
 	}
 
 }

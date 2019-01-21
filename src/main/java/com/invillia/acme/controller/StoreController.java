@@ -16,8 +16,35 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService storeService;
+	
+	@GetMapping(path="/new")
+	public String newStore() {	
+		return "store/new";
+	}
+	
+	@GetMapping(path="/find")
+	public String findStore() {	
+		return "store/find";
+	}
+	
+	@GetMapping(path="/append")
+	public String updateStore() {	
+		return "store/append";
+	}
+	
+	@GetMapping(path="/all")
+	public String getAllStores(Model model) {		
+		model.addAttribute("stores", storeService.findAll());
+		return "store/store";
+	}
+	
+	@GetMapping(path="/byName")
+	public String getStore(@RequestParam String name, Model model) {
+		model.addAttribute("stores", storeService.findByName(name));
+		return "store/store";
+	}	
 
-	@GetMapping(path="/add") // Map ONLY GET Requests
+	@GetMapping(path="/add") 
 	public String addNewStore (@RequestParam String name
 			, @RequestParam String address, Model model) {
 
@@ -26,24 +53,19 @@ public class StoreController {
 		s.setAddress(address);
 		storeService.save(s);
 		model.addAttribute("message", "Store " + name + " saved with success!");
-		return "new";
-	}
+		return "store/new";
+	}	
+	
+	@GetMapping(path="/update") 
+	public String appendStore (@RequestParam Integer id, String name,
+			@RequestParam String address, Model model) {
 
-	@GetMapping(path="/all")
-	public String getAllStores(Model model) {		
-		model.addAttribute("stores", storeService.findAll());
-		return "store";
-	}
-	
-	@GetMapping(path="/byName")
-	public String getStore(@RequestParam String name, Model model) {
-		model.addAttribute("store", storeService.findByName(name));
-		return "store";
-	}
-	
-	
-	@GetMapping(path="/new")
-	public String newStore() {	
-		return "new";
+		Store s = new Store();
+		s.setId(id);
+		s.setName(name);
+		s.setAddress(address);
+		storeService.save(s);
+		model.addAttribute("message", "Store " + name + " updated with success!");
+		return "store/append";
 	}
 }

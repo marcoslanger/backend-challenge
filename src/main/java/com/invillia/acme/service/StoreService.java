@@ -16,7 +16,7 @@ public class StoreService {
 		return storeRepository.findAll();	
 	}
 	
-	public Store findByName(String name) {		
+	public Iterable<Store> findByName(String name) {		
 		return storeRepository.findByName(name);	
 	}
 	
