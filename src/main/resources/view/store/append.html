@@ -10,6 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+  	.rowbottom {
+  		padding-bottom:8px;
+  	}
+  </style>
   
 </head>
 <body>
@@ -29,14 +34,13 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="../">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Manage Store <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="store/new">New Store</a></li>
-                            <li><a href="store/all">Search Store</a></li>
-                            <li><a href="store/append">Update Store</a></li>                           
+                            <li><a href="new">New Store</a></li>
+                            <li><a href="find">Search Store</a></li>                         
                         </ul>
                     </li>  
                     <li class="dropdown">
@@ -45,21 +49,20 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">New Order</a></li>
                             <li><a href="#">Search Order</a></li>
-                            <li><a href="#">Update Order</a></li>                           
                         </ul>
-                    </li>                    
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    </li> 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="./">Logout <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="./">Logout <span class="sr-only">(current)</span></a></li>                                       
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
     
     <div class="panel panel-primary">
-    	<h4>&nbsp;ACME New Store</h4>
+    	<h4>&nbsp;ACME Update Store</h4>
     </div>
     
     <div>
@@ -68,18 +71,19 @@
     
     <div  class="row;panel panel-default">
    
-   		<form method="get" action="add">
+   		<form method="get" action="update">
    		
-	    <div  class="row">
-	    	<div class="col-sm-2">Name:</div><div class="col-sm-6"><input required="required" type="text" name="name"/></div><div class="col-sm-4">&nbsp;</div>
-	   </div>
-	   <div  class="row">	   
-	    	<div class="col-sm-2">Address:</div><div class="col-sm-6"><input required="required" type="text" name="address"/></div><div class="col-sm-4">&nbsp;</div>
-	  </div>
-	  <div  class="row">  	
-	    	<div class="col-sm-2">&nbsp;</div><div class="col-sm-6"><button  class="btn btn-primary" onclick="submit">SAVE STORE</button></div><div class="col-sm-4">&nbsp;</div>
-	    
-	    </div>
+   			<input type="hidden" name="id" th:value="${param.id}" />
+   		
+		    <div class="row rowbottom">
+		    	<div class="col-sm-2">Name:</div><div class="col-sm-6"><input th:value="${param.name}" required="required" type="text" name="name"/></div><div class="col-sm-4">&nbsp;</div>
+		   </div>
+		   <div class="row rowbottom">	   
+		    	<div class="col-sm-2">Address:</div><div class="col-sm-6"><input th:value="${param.address}" required="required" type="text" name="address"/></div><div class="col-sm-4">&nbsp;</div>
+		   </div>
+		   <div class="row rowbottom">  	
+		    	<div class="col-sm-2">&nbsp;</div><div class="col-sm-6"><button  class="btn btn-primary" onclick="submit">SAVE STORE</button></div><div class="col-sm-4">&nbsp;</div>
+		   </div>
 	   
 	   </form>
     </div>
